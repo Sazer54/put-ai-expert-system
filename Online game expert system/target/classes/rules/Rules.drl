@@ -1,0 +1,575 @@
+package com.online_game_expert_system;
+ 
+rule "WhatTypeOfGame?"
+when
+	//init
+then
+    GUI_question gui = make_question_4(Questions.GAME_TYPE, Anwsers.SHOOTERS, Anwsers.RPGS, Anwsers.STRATEGY, Anwsers.VIRTUAL);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "GroundOrSpace?"
+when
+	Response(que == Questions.GAME_TYPE, anw == Anwsers.SHOOTERS.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.GROUND_OR_SPACE, Anwsers.PREFER_SPACE, Anwsers.PREFER_GROUND);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "PreciseOrBig?"
+when
+	Response(que == Questions.GROUND_OR_SPACE, anw == Anwsers.PREFER_SPACE.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.PRECISE_OR_BIG, Anwsers.PREFER_PRECISE, Anwsers.PREFER_BIG);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "BattlestarGalactica"
+when
+	Response(que == Questions.PRECISE_OR_BIG, anw == Anwsers.PREFER_PRECISE.getFullName());
+then
+	show_result(frame, Results.BATTLESTAR);
+end;
+
+rule "AceOnline"
+when
+	Response(que == Questions.PRECISE_OR_BIG, anw == Anwsers.PREFER_BIG.getFullName());
+then
+	show_result(frame, Results.ACE);
+end;
+
+rule "MilitaryOrMonsters?"
+when
+	Response(que == Questions.GROUND_OR_SPACE, anw == Anwsers.PREFER_GROUND.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.MILITARY_OR_MONSTERS, Anwsers.PREFER_MONSTERS, Anwsers.PREFER_MILITARY);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "MummiesOrWerewolves?"
+when
+	Response(que == Questions.MILITARY_OR_MONSTERS, anw == Anwsers.PREFER_MONSTERS.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.MUMMIES_OR_WEREWOLVES, Anwsers.PREFER_WEREWOLVES, Anwsers.PREFER_MUMMIES);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "WolfTeam"
+when
+	Response(que == Questions.MUMMIES_OR_WEREWOLVES, anw == Anwsers.PREFER_WEREWOLVES.getFullName());
+then
+	show_result(frame, Results.WOLF);
+end;
+
+rule "MissionAgainstTerror"
+when
+	Response(que == Questions.MUMMIES_OR_WEREWOLVES, anw == Anwsers.PREFER_MUMMIES.getFullName());
+then
+	show_result(frame, Results.TERROR);
+end;
+
+rule "MilitaryOrSoldiers?"
+when
+	Response(que == Questions.MILITARY_OR_MONSTERS, anw == Anwsers.PREFER_MILITARY.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.TANK_OR_SOLDIER, Anwsers.PREFER_TANK, Anwsers.PREFER_SOLDIER);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "WOT"
+when
+	Response(que == Questions.TANK_OR_SOLDIER, anw == Anwsers.PREFER_TANK.getFullName());
+then
+	show_result(frame, Results.WOT);
+end;
+
+rule "LostSaga"
+when
+	Response(que == Questions.TANK_OR_SOLDIER, anw == Anwsers.PREFER_SOLDIER.getFullName());
+then
+	show_result(frame, Results.LOST);
+end;
+
+rule "RPGGenre?"
+when
+	Response(que == Questions.GAME_TYPE, anw == Anwsers.RPGS.getFullName());
+then
+	GUI_question gui = make_question_4(Questions.RPG_GENRE, Anwsers.FANTASY_RPG, Anwsers.SCIFI_RPG, Anwsers.SUPERHEROES_RPG, Anwsers.DIFFERENT_RPG);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "WOW?"
+when
+	Response(que == Questions.RPG_GENRE, anw == Anwsers.FANTASY_RPG.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.WOW, Anwsers.PLAYED_WOW, Anwsers.NOT_PLAYED_WOW);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "WOW"
+when
+	Response(que == Questions.WOW, anw == Anwsers.NOT_PLAYED_WOW.getFullName());
+then
+	show_result(frame, Results.WOW);
+end;
+
+rule "CasualOrInvolvedRPG?"
+when
+	Response(que == Questions.WOW, anw == Anwsers.PLAYED_WOW.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.CASUAL_OR_INVOLVED_RPG, Anwsers.PREFER_CASUAL_RPG, Anwsers.PREFER_INVOLVED_RPG);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "SometimesIntense?"
+when
+	Response(que == Questions.CASUAL_OR_INVOLVED_RPG, anw == Anwsers.PREFER_CASUAL_RPG.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.INTENSE, Anwsers.PREFER_INTENSE, Anwsers.PREFER_NO_INTENSE);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "Shaiya"
+when
+	Response(que == Questions.INTENSE, anw == Anwsers.PREFER_INTENSE.getFullName());
+then
+	show_result(frame, Results.SHAIYA);
+end;
+
+rule "SoloOrSocial?"
+when
+	Response(que == Questions.INTENSE, anw == Anwsers.PREFER_NO_INTENSE.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.SOLO_OR_SOCIAL, Anwsers.PREFER_SOLO_RPG, Anwsers.PREFER_SOCIAL_RPG);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "AQW"
+when
+	Response(que == Questions.SOLO_OR_SOCIAL, anw == Anwsers.PREFER_SOLO_RPG.getFullName());
+then
+	show_result(frame, Results.AQW);
+end;
+
+rule "DragonFable"
+when
+	Response(que == Questions.SOLO_OR_SOCIAL, anw == Anwsers.PREFER_SOCIAL_RPG.getFullName());
+then
+	show_result(frame, Results.FABLE);
+end;
+
+rule "AgeDigits?"
+when
+	Response(que == Questions.CASUAL_OR_INVOLVED_RPG, anw == Anwsers.PREFER_INVOLVED_RPG.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.AGE_DIGITS, Anwsers.ONE_DIGIT_AGE, Anwsers.TWO_DIGIT_AGE);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "Wizard101"
+when
+	Response(que == Questions.AGE_DIGITS, anw == Anwsers.ONE_DIGIT_AGE.getFullName());
+then
+	show_result(frame, Results.WIZARD);
+end;
+
+rule "Anime?"
+when
+	Response(que == Questions.AGE_DIGITS, anw == Anwsers.TWO_DIGIT_AGE.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.ANIME, Anwsers.LIKE_ANIME, Anwsers.DISLIKE_ANIME);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "LargeBattles?"
+when
+	Response(que == Questions.ANIME, anw == Anwsers.DISLIKE_ANIME.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.LARGE_BATTLES, Anwsers.LIKE_LARGE_BATTLES, Anwsers.DISLIKE_LARGE_BATTLES);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "LOTR?"
+when
+	Response(que == Questions.LARGE_BATTLES, anw == Anwsers.LIKE_LARGE_BATTLES.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.LOTR, Anwsers.LIKE_LOTR, Anwsers.DISLIKE_LOTR);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "LOTR"
+when
+	Response(que == Questions.LOTR, anw == Anwsers.LIKE_LOTR.getFullName());
+then
+	show_result(frame, Results.LOTR);
+end;
+
+rule "QuestsOrPets?"
+when
+	Response(que == Questions.LOTR, anw == Anwsers.DISLIKE_LOTR.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.QUESTS_OR_PETS, Anwsers.PREFER_QUESTS, Anwsers.PREFER_PETS);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "4Story"
+when
+	Response(que == Questions.QUESTS_OR_PETS, anw == Anwsers.PREFER_QUESTS.getFullName());
+then
+	show_result(frame, Results.STORY);
+end;
+
+rule "Aika"
+when
+	Response(que == Questions.QUESTS_OR_PETS, anw == Anwsers.PREFER_PETS.getFullName());
+then
+	show_result(frame, Results.AIKA);
+end;
+
+rule "PVP?"
+when
+	Response(que == Questions.LARGE_BATTLES, anw == Anwsers.DISLIKE_LARGE_BATTLES.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.PVP, Anwsers.LIKE_PVP, Anwsers.DISLIKE_PVP);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "CloseToWOW?"
+when
+	Response(que == Questions.PVP, anw == Anwsers.LIKE_PVP.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.WOW_CLOSE, Anwsers.LIKE_CLOSE_TO_WOW, Anwsers.DISLIKE_CLOSE_TO_WOW);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "RunesOfMagic"
+when
+	Response(que == Questions.WOW_CLOSE, anw == Anwsers.LIKE_CLOSE_TO_WOW.getFullName());
+then
+	show_result(frame, Results.RUNES);
+end;
+
+rule "Features?"
+when
+	Response(que == Questions.WOW_CLOSE, anw == Anwsers.DISLIKE_CLOSE_TO_WOW.getFullName());
+then
+	GUI_question gui = make_question_3(Questions.FEATURES, Anwsers.FEATURE_AUTOPILOT, Anwsers.FEATURE_GOD, Anwsers.FEATURE_HNS);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "CrystalSaga"
+when
+	Response(que == Questions.FEATURES, anw == Anwsers.FEATURE_AUTOPILOT.getFullName());
+then
+	show_result(frame, Results.CRYSTAL);
+end;
+
+rule "ForsakenWorld"
+when
+	Response(que == Questions.FEATURES, anw == Anwsers.FEATURE_GOD.getFullName());
+then
+	show_result(frame, Results.FORSAKEN);
+end;
+
+rule "Drakensang"
+when
+	Response(que == Questions.FEATURES, anw == Anwsers.FEATURE_HNS.getFullName());
+then
+	show_result(frame, Results.DRAKENSANG);
+end;
+
+rule "DNDOrComplex?"
+when
+	Response(que == Questions.PVP, anw == Anwsers.DISLIKE_PVP.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.DND_OR_COMPLEX, Anwsers.PREFER_DND, Anwsers.PREFER_COMPLEX);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "AgeOfConan"
+when
+	Response(que == Questions.DND_OR_COMPLEX, anw == Anwsers.PREFER_COMPLEX.getFullName());
+then
+	show_result(frame, Results.CONAN);
+end;
+
+rule "OldOrNewDND?"
+when
+	Response(que == Questions.DND_OR_COMPLEX, anw == Anwsers.PREFER_DND.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.OLD_OR_NEW_DND, Anwsers.PREFER_OLDSCHOOL, Anwsers.PREFER_CUTTING_EDGE);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "DarkSwords"
+when
+	Response(que == Questions.OLD_OR_NEW_DND, anw == Anwsers.PREFER_OLDSCHOOL.getFullName());
+then
+	show_result(frame, Results.SWORDS);
+end;
+
+rule "DNDOnline"
+when
+	Response(que == Questions.OLD_OR_NEW_DND, anw == Anwsers.PREFER_CUTTING_EDGE.getFullName());
+then
+	show_result(frame, Results.DND);
+end;
+
+rule "MagicalServants?"
+when
+	Response(que == Questions.ANIME, anw == Anwsers.LIKE_ANIME.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.MAGIC_SERVANTS, Anwsers.LIKE_SERVANTS, Anwsers.DISLIKE_SERVANTS);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "GrandFantasia"
+when
+	Response(que == Questions.MAGIC_SERVANTS, anw == Anwsers.LIKE_SERVANTS.getFullName());
+then
+	show_result(frame, Results.FANTASIA);
+end;
+
+rule "MakingCommitments?"
+when
+	Response(que == Questions.MAGIC_SERVANTS, anw == Anwsers.DISLIKE_SERVANTS.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.COMMITMENTS, Anwsers.LIKE_COMMITMENTS, Anwsers.DISLIKE_COMMITMENTS);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "EdenEternal"
+when
+	Response(que == Questions.COMMITMENTS, anw == Anwsers.LIKE_COMMITMENTS.getFullName());
+then
+	show_result(frame, Results.EDEN);
+end;
+
+rule "DreamOfMirror"
+when
+	Response(que == Questions.COMMITMENTS, anw == Anwsers.DISLIKE_COMMITMENTS.getFullName());
+then
+	show_result(frame, Results.MIRROR);
+end;
+
+rule "GroundMissions?"
+when
+	Response(que == Questions.RPG_GENRE, anw == Anwsers.SCIFI_RPG.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.GROUND_MISSIONS, Anwsers.LIKE_GROUND, Anwsers.DISLIKE_GROUND);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "StarTrekOnline"
+when
+	Response(que == Questions.GROUND_MISSIONS, anw == Anwsers.LIKE_GROUND.getFullName());
+then
+	show_result(frame, Results.STAR_TREK);
+end;
+
+rule "EasyOrEpic?"
+when
+	Response(que == Questions.GROUND_MISSIONS, anw == Anwsers.DISLIKE_GROUND.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.EASY_OR_EPIC, Anwsers.PREFER_EASY, Anwsers.PREFER_EPIC);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "DarkOrbit"
+when
+	Response(que == Questions.EASY_OR_EPIC, anw == Anwsers.PREFER_EASY.getFullName());
+then
+	show_result(frame, Results.ORBIT);
+end;
+
+rule "EveOnline"
+when
+	Response(que == Questions.EASY_OR_EPIC, anw == Anwsers.PREFER_EPIC.getFullName());
+then
+	show_result(frame, Results.EVE);
+end;
+
+rule "OldEnough?"
+when
+	Response(que == Questions.RPG_GENRE, anw == Anwsers.SUPERHEROES_RPG.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.INCREDIBLES, Anwsers.INCREDIBLE, Anwsers.NOT_INCREDIBLE);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "DCUniverseOnline"
+when
+	Response(que == Questions.INCREDIBLES, anw == Anwsers.INCREDIBLE.getFullName());
+then
+	show_result(frame, Results.DC);
+end;
+
+rule "SuperheroSquadOnline"
+when
+	Response(que == Questions.INCREDIBLES, anw == Anwsers.NOT_INCREDIBLE.getFullName());
+then
+	show_result(frame, Results.SUPERHERO);
+end;
+
+rule "StrangeEnough?"
+when
+	Response(que == Questions.RPG_GENRE, anw == Anwsers.DIFFERENT_RPG.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.VAMPIRE_HUNTER, Anwsers.STRANGE, Anwsers.NOT_STRANGE);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "Bitefight"
+when
+	Response(que == Questions.VAMPIRE_HUNTER, anw == Anwsers.STRANGE.getFullName());
+then
+	show_result(frame, Results.BITEFIGHT);
+end;
+
+rule "Glitch"
+when
+	Response(que == Questions.VAMPIRE_HUNTER, anw == Anwsers.NOT_STRANGE.getFullName());
+then
+	show_result(frame, Results.GLITCH);
+end;
+
+rule "StrategySetting?"
+when
+	Response(que == Questions.GAME_TYPE, anw == Anwsers.STRATEGY.getFullName());
+then
+	GUI_question gui = make_question_3(Questions.STRATEGY_SETTING, Anwsers.FANTASY_STRATEGY, Anwsers.HISTORICAL_STRATEGY, Anwsers.MAFIA_STRATEGY);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "RPGElements?"
+when
+	Response(que == Questions.STRATEGY_SETTING, anw == Anwsers.FANTASY_STRATEGY.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.RPG_ELEMENTS, Anwsers.PREFER_RPG_ELEMENTS, Anwsers.PREFER_STRAIGHT);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "CallOfGods"
+when
+	Response(que == Questions.RPG_ELEMENTS, anw == Anwsers.PREFER_RPG_ELEMENTS.getFullName());
+then
+	show_result(frame, Results.CALL);
+end;
+
+rule "Grepolis"
+when
+	Response(que == Questions.RPG_ELEMENTS, anw == Anwsers.PREFER_STRAIGHT.getFullName());
+then
+	show_result(frame, Results.GREPOLIS);
+end;
+
+rule "CasualOrInvolvedStrategy?"
+when
+	Response(que == Questions.STRATEGY_SETTING, anw == Anwsers.HISTORICAL_STRATEGY.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.CASUAL_OR_INVOLVED_STRATEGY, Anwsers.PREFER_CASUAL_STRATEGY, Anwsers.PREFER_INVOLVED_STRATEGY);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "RealTimeOrHigherLevel?"
+when
+	Response(que == Questions.CASUAL_OR_INVOLVED_STRATEGY, anw == Anwsers.PREFER_CASUAL_STRATEGY.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.REAL_TIME, Anwsers.PREFER_REAL_TIME, Anwsers.PREFER_HIGHER_LEVEL);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "1100AD"
+when
+	Response(que == Questions.REAL_TIME, anw == Anwsers.PREFER_REAL_TIME.getFullName());
+then
+	show_result(frame, Results.AD);
+end;
+
+rule "TribalWars"
+when
+	Response(que == Questions.REAL_TIME, anw == Anwsers.PREFER_HIGHER_LEVEL.getFullName());
+then
+	show_result(frame, Results.TRIBAL);
+end;
+
+rule "SoloOrAliances?"
+when
+	Response(que == Questions.CASUAL_OR_INVOLVED_STRATEGY, anw == Anwsers.PREFER_INVOLVED_STRATEGY.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.SOLO_OR_ALLIANCES, Anwsers.PREFER_SOLO_STRATEGY, Anwsers.PREFER_ALIANCES);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "CastleEmpire"
+when
+	Response(que == Questions.SOLO_OR_ALLIANCES, anw == Anwsers.PREFER_SOLO_STRATEGY.getFullName());
+then
+	show_result(frame, Results.CASTLE);
+end;
+
+rule "Travian"
+when
+	Response(que == Questions.SOLO_OR_ALLIANCES, anw == Anwsers.PREFER_ALIANCES.getFullName());
+then
+	show_result(frame, Results.TRAVIAN);
+end;
+
+rule "Godfather"
+when
+	Response(que == Questions.STRATEGY_SETTING, anw == Anwsers.MAFIA_STRATEGY.getFullName());
+then
+	show_result(frame, Results.GODFATHER);
+end;
+
+rule "FreeformOrBuiltIn?"
+when
+	Response(que == Questions.GAME_TYPE, anw == Anwsers.VIRTUAL.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.FREEFORM, Anwsers.PREFER_BUILT_IN, Anwsers.PREFER_FREEDOM);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "BlocksOrLegos?"
+when
+	Response(que == Questions.FREEFORM, anw == Anwsers.PREFER_BUILT_IN.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.BLOCKS_OR_LEGO, Anwsers.PREFER_BLOCKS, Anwsers.PREFER_LEGOS);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "MinecraftClassic"
+when
+	Response(que == Questions.BLOCKS_OR_LEGO, anw == Anwsers.PREFER_BLOCKS.getFullName());
+then
+	show_result(frame, Results.MC);
+end;
+
+rule "Roblox"
+when
+	Response(que == Questions.BLOCKS_OR_LEGO, anw == Anwsers.PREFER_LEGOS.getFullName());
+then
+	show_result(frame, Results.ROBLOX);
+end;
+
+rule "ChatOrCreate?"
+when
+	Response(que == Questions.FREEFORM, anw == Anwsers.PREFER_FREEDOM.getFullName());
+then
+	GUI_question gui = make_question_2(Questions.CHAT_OR_CREATE, Anwsers.PREFER_CHAT, Anwsers.PREFER_CREATE);
+    show_question(frame, gui, kcontext.getKieRuntime());
+end;
+
+rule "IMVU"
+when
+	Response(que == Questions.CHAT_OR_CREATE, anw == Anwsers.PREFER_CHAT.getFullName());
+then
+	show_result(frame, Results.IMVU);
+end;
+
+rule "SecondLife"
+when
+	Response(que == Questions.CHAT_OR_CREATE, anw == Anwsers.PREFER_CREATE.getFullName());
+then
+	show_result(frame, Results.SECOND_LIFE);
+end;

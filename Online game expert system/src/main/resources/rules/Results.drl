@@ -1,0 +1,53 @@
+package com.online_game_expert_system;
+
+declare enum Results
+	BATTLESTAR("Battlestar Galactica"),
+	ACE("Ace Online"),
+	WOLF("Wolf Team"),
+	TERROR("Mission Against Terror"),
+	WOT("World of Tanks"),
+	LOST("Lost Saga"),
+	WOW("World of Warcraft"),
+	SHAIYA("Shaiya"),
+	AQW("Adventure Quest Worlds"),
+	FABLE("Dragon Fable"),
+	WIZARD("Wizard 101"),
+	LOTR("Lord of the Rings Online"),
+	STORY("4Story"),
+	AIKA("Aika"),
+	RUNES("Runes of Magic"),
+	CRYSTAL("Crystal Saga"),
+	FORSAKEN("Forsaken World"),
+	DRAKENSANG("Drakensang"),
+	CONAN("Age of Conan"),
+	SWORDS("Dark Swords"),
+	DND("Dungeons and Dragons Online"),
+	MIRROR("Dream of Mirror"),
+	EDEN("Eden Eternal"),
+	FANTASIA("Grand Fantasia"),
+	STAR_TREK("Star Trek Online"),
+	ORBIT("Dark Orbit"),
+	EVE("Eve Online"),
+	DC("DC Universe Online"),
+	SUPERHERO("Superhero Squad Online"),
+	BITEFIGHT("Bitefight"),
+	GLITCH("Glitch"),
+	CALL("Call of Gods"),
+	GREPOLIS("Grepolis"),
+	CASTLE("Castle Empire"),
+	TRAVIAN("Travian"),
+	AD("1100 AD"),
+	TRIBAL("Tribal Wars"),
+	GODFATHER("Godfather: Five Families"),
+	MC("Minecraft Classic"),
+	ROBLOX("Roblox"),
+	IMVU("IMVU"),
+	SECOND_LIFE("Second Life")
+	;
+    
+    fullName : String
+end
+
+declare Result
+	result : Results
+end
